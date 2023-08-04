@@ -9,21 +9,24 @@ const App = () => {
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
 
-  const increaseGood = () => setGood(good + 1);
+  const feedbackTotal = good + neutral + bad;
 
-  const increaseNeutral = () => setNeutral(neutral + 1);
+  const feedbackAverage = (good - bad) / feedbackTotal || 0;
 
-  const increaseBad = () => setBad(bad + 1);
+  const feedbackPositive = (100 / feedbackTotal) * good || 0;
 
   return (
     <div>
       <h1>Give feedback</h1>
-      <Button handleClick={increaseGood} text="good"></Button>
-      <Button handleClick={increaseNeutral} text="neutral"></Button>
-      <Button handleClick={increaseBad} text="bad"></Button>
+      <Button handleClick={() => setGood(good + 1)} text="good" />
+      <Button handleClick={() => setNeutral(neutral + 1)} text="neutral" />
+      <Button handleClick={() => setBad(bad + 1)} text="bad" />
       <p>good: {good}</p>
       <p> neutral: {neutral} </p>
       <p>bad: {bad}</p>
+      <p>total: {feedbackTotal}</p>
+      <p>average: {feedbackAverage}</p>
+      <p>positive: {feedbackPositive}%</p>
     </div>
   );
 };
